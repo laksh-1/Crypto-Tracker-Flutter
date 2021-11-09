@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 const List<String> currenciesList = [
   'AUD',
@@ -38,9 +39,10 @@ class CoinData {
     late double BTC;
     late double ETH;
     late double DOGE;
+    var api_key = dotenv.env["API_KEY"];
     List<double> rate = [];
     String requestURL1 =
-        'http://api.coinlayer.com/live?access_key=1ae891a988d2b92cc634d09e2288b71b&target=$currency';
+        'http://api.coinlayer.com/live?access_key=$api_key&target=$currency';
 
     http.Response response1 = await http.get(Uri.parse(requestURL1));
     if (response1.statusCode == 200) {
